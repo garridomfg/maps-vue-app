@@ -8,7 +8,7 @@
       v-for="place in places"
       :key="place.id"
       class="list-group-item list-group-item-action text-align-left"
-      :class="{ 'active': place.id === activePlace }"
+      :class="{ active: place.id === activePlace }"
       @click="onPlaceClick(place)"
     >
       <h5>{{ place.text }}</h5>
@@ -16,7 +16,17 @@
         {{ place.place_name }}
       </p>
       <div align="right">
-        <button :class="(place.id === activePlace ? 'btn-outline-light' : 'btn-outline-primary')" class="btn btn-outline-primary">Directions</button>
+        <button
+          :class="
+            place.id === activePlace
+              ? 'btn-outline-light'
+              : 'btn-outline-primary'
+          "
+          class="btn btn-outline-primary"
+          @click.self="getRouteDirections(place)"
+        >
+          Directions
+        </button>
       </div>
     </li>
   </ul>

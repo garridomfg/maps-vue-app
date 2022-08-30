@@ -6,8 +6,8 @@ import { Feature } from "../../interfaces/places";
 export default defineComponent({
   name: "SearchResults",
   setup() {
-    const { places, isLoadingPlaces } = usePlacesStore();
-    const { map, setPlaceMarkers } = useMapStore();
+    const { places, isLoadingPlaces, userLocation } = usePlacesStore();
+    const { map, setPlaceMarkers, getRouteBetweenPoints } = useMapStore();
     const activePlace = ref("");
 
     watch(places, (newPlaces) => {
@@ -21,6 +21,7 @@ export default defineComponent({
       activePlace,
 
       onPlaceClick: (place: Feature) => {
+
         activePlace.value = place.id;
         const [lng, lat] = place.center;
 
@@ -29,6 +30,17 @@ export default defineComponent({
           zoom: 15,
         });
       },
+      getRouteDirections: (place: Feature) => {
+        if(!userLocation.value) return;
+        
+        const [startLng, startLat] = userLocation.value;
+        const [lng, lat] = place.center;
+
+        const start: [number, number] = [startLng, startLat];
+        const end: [number, number] = [lng, lat];
+
+        getRouteBetweenPoints(start, end)
+      }
     };
   },
 });
