@@ -1,5 +1,9 @@
-# Maps application, made with Vue3, Vuex, Axios and the Mapbox API,
-# The application consists of get the user's location, searching for places and plotting the best direction between the starting point and the selected place
+## Map Vue App
+```
+Maps application, made with Vue3, Vuex, Axios and the Mapbox API, 
+he application consists of get the user's location, searching for 
+places and plotting the best direction between the starting point 
+and the selected place```
 
 ## Project setup
 ```
